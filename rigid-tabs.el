@@ -115,11 +115,11 @@ format. Only `diff-mode' and various magit modes are supported. Use
     (let (last-line last-point current-column)
       (while (search-forward "\t" end t)
 	(goto-char (match-beginning 0))
-	(let ((current-line (line-number-at-pos)))
+	(let ((current-line (line-beginning-position)))
 	  (setq current-column
 		(if (eq last-line current-line)
 		    (+ (- (point) last-point) current-column)
-		    (current-column)))
+		  (current-column)))
 	  (let* ((column (- current-column rigid-tabs-shift-chars))
 		 (target (+ (* (/ column tab-width) tab-width) tab-width))
 		 (spaces (- target column)))
