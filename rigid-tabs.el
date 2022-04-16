@@ -105,7 +105,7 @@ format. Only `diff-mode' and various magit modes are supported. Use
   (setq rigid-tabs-mode t))
 
 (defun rigid-tabs--remove ()
-  (dolist (ovr (overlays-in (point-min) (point-max)))
+  (dolist (ovr (reverse (overlays-in (point-min) (point-max))))
     (when (overlay-get ovr 'rigid-tab)
       (delete-overlay ovr))))
 
