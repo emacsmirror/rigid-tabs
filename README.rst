@@ -1,5 +1,5 @@
-rigid-tabs.el: Rigidify and adjust the visual alignment of TABs
-===============================================================
+rigid-tabs.el: Fix TAB alignment in diff buffers
+================================================
 
 ``rigid-tabs-mode`` turns a "diff" buffer displaying TABs like this:
 
