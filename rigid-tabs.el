@@ -112,7 +112,7 @@ format. Only `diff-mode' and magit modes are supported. Use
     (when (overlay-get ovr 'rigid-tab)
       (delete-overlay ovr))))
 
-(defun rigid-tabs--rigid-align-region (beg end &optional length)
+(defun rigid-tabs--rigid-align-region (beg end &optional _length)
   (save-excursion
     (goto-char beg)
     (let (last-line last-point current-column)
@@ -139,11 +139,11 @@ format. Only `diff-mode' and magit modes are supported. Use
     (overlay-put ovr 'modifications-hooks '(rigid-tabs--modify))
     (overlay-put ovr 'display `(space . (:width ,spaces)))))
 
-(defun rigid-tabs--insert-in-front (ovr after-change beg end &optional length)
+(defun rigid-tabs--insert-in-front (ovr after-change _beg end &optional _length)
   (when after-change
     (move-overlay ovr end (overlay-end ovr))))
 
-(defun rigid-tabs--modify (ovr after-change beg end &optional length)
+(defun rigid-tabs--modify (ovr after-change _beg _end &optional _length)
   (unless after-change
     (delete-overlay ovr)))
 
