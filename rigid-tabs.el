@@ -59,23 +59,25 @@
 
 ;;;###autoload
 (define-minor-mode rigid-tabs-mode
-    "Rigidify all TABs in the current buffer, making them non-flexible just
-like a block of spaces. Use `rigid-tabs-rigid-align' to also align TABs in diff
-modes properly (turns on `rigid-tabs-mode' as a result)."
-    :init-value nil
-    :lighter " RTab"
-    (cond
-      (rigid-tabs-mode
-       (rigid-tabs-rigid-align)
-       (rigid-tabs--turn-on))
-      (t
-       (remove-hook 'after-change-functions 'rigid-tabs--rigid-align-region t)
-       (rigid-tabs--remove))))
+  "Rigidify all TABs in the current buffer.
+Rigidifies all TABs in the current buffer, making them non-flexible just
+like a block of spaces. Use `rigid-tabs-rigid-align' to also align TABs
+in diff modes properly (which turns on `rigid-tabs-mode' as a result)."
+  :init-value nil
+  :lighter " RTab"
+  (cond
+   (rigid-tabs-mode
+    (rigid-tabs-rigid-align)
+    (rigid-tabs--turn-on))
+   (t
+    (remove-hook 'after-change-functions 'rigid-tabs--rigid-align-region t)
+    (rigid-tabs--remove))))
 
 ;;;###autoload
 (defun rigid-tabs-rigid-align (&optional shift-chars)
-  "Rigidify TABs in the current buffer (make them non-flexible) and adjust
-their visual alignment by 'shift-chars forward. Turns on `rigid-tabs-mode'."
+  "Rigidify TABs in the current buffer and manually adjust alignment.
+Rigidifies all TABs in the current buffer and adjusts their visual
+alignment by SHIFT-CHARS forward. Turns on `rigid-tabs-mode'."
   (when shift-chars
     (setq rigid-tabs-shift-chars shift-chars))
   (rigid-tabs--rigid-align-region (point-min) (point-max))
@@ -84,8 +86,9 @@ their visual alignment by 'shift-chars forward. Turns on `rigid-tabs-mode'."
 
 ;;;###autoload
 (defun rigid-tabs-diff-align ()
-  "Turn on `rigid-tabs-mode' according to the current major mode and diff
-format. Only `diff-mode' and various magit modes are supported. Use
+  "Rigidify TABs according to the current major mode and diff format.
+Turn on `rigid-tabs-mode' according to the current major mode and diff
+format. Only `diff-mode' and magit modes are supported. Use
 `rigid-tabs-rigid-align' directly in other modes."
   (interactive)
   (cond
